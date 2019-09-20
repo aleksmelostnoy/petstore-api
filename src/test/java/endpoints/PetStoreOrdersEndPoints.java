@@ -6,6 +6,7 @@ import utils.PropertiesController;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.lessThan;
 
 public class PetStoreOrdersEndPoints {
@@ -20,14 +21,14 @@ public class PetStoreOrdersEndPoints {
                     .get(GET_INVENTORY);
     }
 
-    public Response getStoreOrderById(int id) {
+    public Response getStoreOrderById(long id) {
         return given()
                 .when()
                     .pathParam("orderId", id)
                     .get(GET_INVENTORY_BY_ORDER_ID);
     }
 
-    public Response deleteStoreOrderById(int id) {
+    public Response deleteStoreOrderById(long id) {
         return given()
                 .when()
                     .pathParam("orderId", id)
@@ -40,10 +41,13 @@ public class PetStoreOrdersEndPoints {
                 .when()
                     .post(CREATE_ORDER);
 
-        response
-                .then()
-                    .assertThat()
-                    .body("petId", equalTo(order.getPetId()));
+        Number petId = response
+                    .then()
+                    .extract()
+                    .path("petId");
+
+        assertThat(petId.longValue(), equalTo(order.getPetId()));
+
 
         return response;
     }

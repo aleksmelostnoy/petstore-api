@@ -3,7 +3,7 @@ package models;
 import java.util.Objects;
 
 public class User {
-    private int id;
+    private long id;
     private String username;
     private String firstName;
     private String lastName;
@@ -12,11 +12,11 @@ public class User {
     private String phone;
     private int userStatus;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -109,4 +109,5 @@ public class User {
     public int hashCode() {
         return Objects.hash(id, username, firstName, lastName, email, password, phone, userStatus);
     }
+
 }

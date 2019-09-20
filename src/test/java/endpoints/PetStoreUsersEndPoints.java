@@ -15,6 +15,9 @@ public class PetStoreUsersEndPoints {
     private static final String GET_USER_USERNAME = PropertiesController.getProperty("petstore.get.by.username");
     private static final String CREATE_USER_WITH_ARREY = PropertiesController.getProperty("petstore.create.user.with.array");
     private static final String CREATE_USER_WITH_LIST = PropertiesController.getProperty("petstore.create.user.with.list");
+    private static final String GET_LOGIN_USER = PropertiesController.getProperty("petstore.get.by.loginUser");
+    private static final String UPDATE_USER_BY_USERNAME = PropertiesController.getProperty("petstore.update.user.by.username");
+    private static final String LOGOUT = PropertiesController.getProperty("petstore.logout");
 
     public Response createUser(User user) {
         Response response = given()
@@ -27,6 +30,18 @@ public class PetStoreUsersEndPoints {
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK);
 
+        return response;
+    }
+
+    public Response sendUserToServis(User user) {
+        Response response = given()
+                .body(user)
+                .when().log().all()
+                .get(GET_LOGIN_USER);
+        response
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK).log().all();
         return response;
     }
 
@@ -73,6 +88,27 @@ public class PetStoreUsersEndPoints {
 
         return response;
     }
+    public Response updateUserByUsername(User user, String username) {
+        Response response = given()
+                .header("Content-type", "application/json")
+                .body(user)
+                .when()
+                .pathParam("username", username)
+                .put(UPDATE_USER_BY_USERNAME);
+        response
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK);
+        return response;
+    }
+
+    public Response logout() {
+        Response response = given()
+                .when()
+                .get(LOGOUT);
+        return response;
+    }
+
 }
 
 

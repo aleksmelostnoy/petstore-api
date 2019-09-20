@@ -1,6 +1,7 @@
 package models.Pet;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Pet {
 
@@ -13,7 +14,6 @@ public class Pet {
 
     private Category categoryObject;
 
-    // Getter Methods
     public long getId() {
         return id;
     }
@@ -29,8 +29,6 @@ public class Pet {
     public String getStatus() {
         return status;
     }
-
-    // Setter Methods
 
     public void setId(long id) {
         this.id = id;
@@ -65,27 +63,39 @@ public class Pet {
     }
 
     public static Pet createDefaultPet() {
-
         ArrayList<String> urlPhoto = new ArrayList<>();
         ArrayList<Tags> tags = new ArrayList<>();
-
         urlPhoto.add("https://pbs.twimg.com/profile_images/429645944754159616/jzY41c_k.png");
         tags.add(new Tags());
-
         Pet pet = new Pet();
-        pet.setId((int)(Math.random()*1000));
+        pet.setId((long)(Math.random()*1000));
         pet.setName("Vincent");
         pet.setStatus("available");
         pet.setPhotoUrls(urlPhoto);
         pet.setTags(tags);
-
         Category category = new Category();
-        category.setId((int)(Math.random()*1000));
+        category.setId((long) (Math.random()*1000));
         category.setName("category");
-
         pet.setCategory(category);
-
         return pet;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pet pet = (Pet) o;
+        return getId() == pet.getId() &&
+                Objects.equals(getName(), pet.getName()) &&
+                Objects.equals(getStatus(), pet.getStatus()) &&
+                Objects.equals(getPhotoUrls(), pet.getPhotoUrls()) &&
+                Objects.equals(getTags(), pet.getTags()) &&
+                Objects.equals(categoryObject, pet.categoryObject);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getStatus(), getPhotoUrls(), getTags(), categoryObject);
     }
 
 }

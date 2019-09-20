@@ -1,12 +1,14 @@
 package models.Pet;
 
+import java.util.Objects;
+
 public class Tags {
 
     private long id;
     private String name;
 
     public Tags() {
-        id = (int)(Math.random()*1000);
+        id = (long) (Math.random()*1000);
         name = "TestTagName1";
     }
 
@@ -34,18 +36,13 @@ public class Tags {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Tags tags = (Tags) o;
-
-        if (id != tags.id) return false;
-        return name.equals(tags.name);
+        return getId() == tags.getId() &&
+                Objects.equals(getName(), tags.getName());
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + name.hashCode();
-        return result;
+        return Objects.hash(getId(), getName());
     }
-
 }

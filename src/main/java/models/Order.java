@@ -1,25 +1,27 @@
 package models;
 
+import java.util.Objects;
+
 public class Order {
-    private int id;
-    private int petId;
+    private long id;
+    private long petId;
     private int quantity;
     private Status status;
     private boolean complete;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getPetId() {
+    public long getPetId() {
         return petId;
     }
 
-    public void setPetId(int petId) {
+    public void setPetId(long petId) {
         this.petId = petId;
     }
 
@@ -56,4 +58,22 @@ public class Order {
         order.setComplete(false);
         return order;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return getId() == order.getId() &&
+                getPetId() == order.getPetId() &&
+                getQuantity() == order.getQuantity() &&
+                isComplete() == order.isComplete() &&
+                getStatus() == order.getStatus();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getPetId(), getQuantity(), getStatus(), isComplete());
+    }
+
 }

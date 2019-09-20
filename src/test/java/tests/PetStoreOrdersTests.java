@@ -17,7 +17,7 @@ public class PetStoreOrdersTests extends BaseTest {
         //when
         Response orderFromResponse = PET_STORE_ORDERS_END_POINTS.createOrder(order);
         //then
-        int createdOrderId = orderFromResponse.body().as(Order.class).getId();
+        long createdOrderId = orderFromResponse.body().as(Order.class).getId();
         Order createdOrderFromService = PET_STORE_ORDERS_END_POINTS.getStoreOrderById(createdOrderId).as(Order.class);
 
         SoftAssert assertions = new SoftAssert();
@@ -34,7 +34,7 @@ public class PetStoreOrdersTests extends BaseTest {
         //given
         Order order = Order.createDefaultOrder();
         Response orderFromResponse = PET_STORE_ORDERS_END_POINTS.createOrder(order);
-        int createdOrderId = orderFromResponse.body().as(Order.class).getId();
+        long createdOrderId = orderFromResponse.body().as(Order.class).getId();
         //when
         Order createdOrderFromServiceObject = PET_STORE_ORDERS_END_POINTS.getStoreOrderById(createdOrderId).as(Order.class);
         //then
@@ -53,7 +53,7 @@ public class PetStoreOrdersTests extends BaseTest {
         //given
         Order order = Order.createDefaultOrder();
         Response orderFromResponse = PET_STORE_ORDERS_END_POINTS.createOrder(order);
-        int createdOrderId = orderFromResponse.body().as(Order.class).getId();
+        long createdOrderId = orderFromResponse.body().as(Order.class).getId();
         //when
         PET_STORE_ORDERS_END_POINTS.deleteStoreOrderById(createdOrderId);
         //then
@@ -68,7 +68,7 @@ public class PetStoreOrdersTests extends BaseTest {
         //given
         Order order = Order.createDefaultOrder();
         Response orderFromResponse = PET_STORE_ORDERS_END_POINTS.createOrder(order);
-        int createdOrderId = orderFromResponse.body().as(Order.class).getId();
+        long createdOrderId = orderFromResponse.body().as(Order.class).getId();
         //when
         Response createdOrderFromServiceObject = PET_STORE_ORDERS_END_POINTS.getStoreOrderById(createdOrderId);
         //then

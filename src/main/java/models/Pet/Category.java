@@ -1,5 +1,7 @@
 package models.Pet;
 
+import java.util.Objects;
+
 class Category {
 
     private long id;
@@ -29,18 +31,13 @@ class Category {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Category category = (Category) o;
-
-        if (id != category.id) return false;
-        return name.equals(category.name);
+        return getId() == category.getId() &&
+                Objects.equals(getName(), category.getName());
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + name.hashCode();
-        return result;
+        return Objects.hash(getId(), getName());
     }
-
 }
