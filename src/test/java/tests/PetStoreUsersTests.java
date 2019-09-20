@@ -85,7 +85,6 @@ public class PetStoreUsersTests extends BaseTest {
         PET_STORE_USERS_END_POINTS.createWithArray(users);
         //then
         User createWithArrayFromService = PET_STORE_USERS_END_POINTS.getUserByUsername(users[2].getUsername()).as(User.class);
-
         SoftAssert assertions = new SoftAssert();
         assertions.assertEquals(createWithArrayFromService.getId(), users[2].getId());
         assertions.assertAll();
@@ -107,7 +106,6 @@ public class PetStoreUsersTests extends BaseTest {
         PET_STORE_USERS_END_POINTS.createWithList(users);
         //then
         User createWithListFromService = PET_STORE_USERS_END_POINTS.getUserByUsername(users.get(0).getUsername()).as(User.class);
-        ;
 
         SoftAssert assertions = new SoftAssert();
         assertions.assertEquals(createWithListFromService.getId(), users.get(0).getId());
@@ -155,7 +153,4 @@ public class PetStoreUsersTests extends BaseTest {
         assertions.assertTrue(session.matches("-?\\d+(\\.\\d+)?"));
         assertions.assertAll();
     }
-
 }
-
-
