@@ -4,9 +4,7 @@ import io.restassured.response.Response;
 import models.User;
 import org.apache.http.HttpStatus;
 import utils.PropertiesController;
-
 import java.util.List;
-
 import static io.restassured.RestAssured.given;
 
 public class PetStoreUsersEndPoints {
@@ -59,8 +57,6 @@ public class PetStoreUsersEndPoints {
                 .get(GET_USER_USERNAME);
     }
 
-
-
     public Response createWithArray(User[] users) {
         Response response = given()
                 .body(users)
@@ -110,6 +106,3 @@ public class PetStoreUsersEndPoints {
     }
 
 }
-
-
-
