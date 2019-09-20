@@ -77,7 +77,6 @@ public class PetStoreUsersTests extends BaseTest {
     public void createWithArrayTest() {
         //given
         User[] users = {User.createUser(), User.createUser(), User.createUser()};
-
         users[0].setUsername("0");
         users[1].setUsername("1");
         users[2].setUsername("2");
@@ -97,16 +96,13 @@ public class PetStoreUsersTests extends BaseTest {
         users.add(User.createUser());
         users.add(User.createUser());
         users.add(User.createUser());
-
         users.get(0).setUsername("0");
         users.get(1).setUsername("1");
         users.get(2).setUsername("2");
-
         //when
         PET_STORE_USERS_END_POINTS.createWithList(users);
         //then
         User createWithListFromService = PET_STORE_USERS_END_POINTS.getUserByUsername(users.get(0).getUsername()).as(User.class);
-
         SoftAssert assertions = new SoftAssert();
         assertions.assertEquals(createWithListFromService.getId(), users.get(0).getId());
         assertions.assertAll();
